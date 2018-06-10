@@ -54,6 +54,11 @@ auth_userpass(const char *user, const char *pass, int *errorcode)
         return 0;
     }
 
+    if (ip && pam_set_item(auth_info->ph, PAM_RHOST, ip) != PAM_SUCCESS)
+    {
+        return 0;
+    }
+
     status = pam_authenticate(pamh, 0);
 
     if (status != PAM_SUCCESS)
